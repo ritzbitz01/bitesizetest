@@ -1,1 +1,23 @@
-test
+project: ryantest
+environments:
+  - name: dev
+    namespace: ryantest-dev
+    deployment:
+      method: rolling-upgrade
+    services:
+      - name: front
+        external_url: ryantest.dev-bite.io
+        ssl: false
+        port: 80
+        env:
+          - name: BACK_END
+            value: back.glp-dev.svc.cluster.local
+          - name: APP_PORT
+            value: 80
+      - name: back
+        external_url: ryantest.dev-bite.io
+        ssl: false
+        port: 80
+        env:
+          - name: APP_PORT
+            value: 80
